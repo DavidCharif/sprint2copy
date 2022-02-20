@@ -1,0 +1,9 @@
+:root{
+  --body1-bold: 700 1rem/1.5rem Nunito;
+}
+html, body {
+  margin:0px;
+  height:100%;
+  font-family: 'Nunito', sans-serif;
+  font: var(--body1-regular);
+}

@@ -1,0 +1,1 @@
+export const url = "https://daily-bits-sprint1.herokuapp.com/data/"
