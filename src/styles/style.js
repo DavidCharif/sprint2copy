@@ -6,10 +6,12 @@ const _primary = "#7f5af0";
 // const _secondary = "#a786df";
 // const _tertiary = "#72757e";
 const _green = "#2cb67d";
+const _lightgreen = "#ACFFCF";
 // const _grey = "#94a1b2";
-// const _purple = "#6b47dc";
+const _purple = "#6b47dc";
 const _neutral = "#232e35";
 const _red = "#ef4565";
+const _lightred = "#F9CFD7";
 // const _subtitle2 = "600 0.75rem/normal Nunito;";
 const _headline_headline1 = "800 2rem/normal Nunito;";
 const _headline_headline2 = "700 1.375rem/normal Nunito;";
@@ -314,53 +316,154 @@ export const SignInStyled = styled.div`
 export const QuizStyled = styled.div`
   background-color: ${_black};
   height: 100vh;
-  
- 
-  
+
+  .selected {
+    border: 2px solid ${_green};
+  }
+  .wrong {
+    border: 2px solid ${_green};
+    background-color: ${_red};
+  }
+
   .barraDeVida {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     #myProgress {
-    position: relative;
-    width: 75%;
-    height: 12px;
-    background-color: ${_white};
-    
-    border-radius:20px
+      position: relative;
+      width: 75%;
+      height: 12px;
+      background-color: ${_white};
+
+      border-radius: 20px;
+    }
+    img {
+      width: 24px;
+      height: 24px;
+      margin-right: 5px;
+      margin-left: 5px;
+    }
+    p {
+      font: ${_body1_bold};
+      color: white;
+    }
+    #myBar {
+      position: absolute;
+      width: var(--fill);
+      height: 100%;
+      background-color: ${_green};
+      border-radius: 20px;
+    }
   }
-  img {
-    width: 24px;
-    height: 24px;
-    margin-right: 5px;
-    margin-left: 5px;
-  }
-  p{
-    font:${_body1_bold};
-    color:white;
-  }
-  #myBar {
-    position: absolute;
-    width: var(--fill);
-    height: 100%;
-    background-color: ${_green};
-    border-radius:20px;
-  }
- 
-  }
-  .pregunta{
+  .pregunta {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    p{
+    p {
       font: ${_headline_headline2};
       width: 70%;
       color: ${_white};
     }
-    img{
-      width:75px;
+    img {
+      width: 75px;
       height: 160px;
     }
+  }
+  .boton {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+  .isSelected {
+    background-color: ${_purple};
+  }
+`;
+export const BotonRespuestas = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 56px;
+  min-width: 328px;
+  background-color: ${_neutral};
+  margin: 15px;
+  border: 2px solid ${_white};
+  border-radius: 4px;
+  cursor: pointer;
+  img {
+    width: 20px;
+    height: 20px;
+    margin-right: 30px;
+  }
+  p {
+    font: ${_body1_regular};
+    color: ${_white};
+    margin-left: 30px;
+  }
+`;
+export const BotonValidar = styled.div`
+  background-color: #d4caf3;
+  padding: 15px;
+  border-radius: 12px;
+  width: 80%;
+  bottom: 30px;
+  position: fixed;
+  font: ${_button_button};
+  color: white;
+  cursor: pointer;
+`;
+export const RespuestaCorrectaStyled = styled.div`
+  display: flex;
+  bottom: 0;
+  position: fixed;
+  color: ${_black};
+  background-color: ${_lightgreen};
+  width: 100%;
+  height: 130px;
+  flex-direction: column;
+  .boton {
+    cursor: pointer;
+    background-color: ${_green};
+
+    border-radius: 12px;
+    width: 80%;
+    height: 48px;
+    font: ${_button_button};
+    color: white;
+    margin: auto;
+  }
+  h2 {
+    font: ${_body1_bold};
+    margin-left: 15px;
+  }
+`;
+export const RespuestaIncorrectaStyled = styled.div`
+  display: flex;
+  bottom: 0;
+  position: fixed;
+  color: ${_black};
+  background-color: ${_lightred};
+  width: 100%;
+  height: 154px;
+  flex-direction: column;
+  .boton {
+    cursor: pointer;
+    background-color: ${_red};
+    border-radius: 12px;
+    width: 80%;
+    height: 48px;
+    font: ${_button_button};
+    color: white;
+    margin: auto;
+  }
+  h2 {
+    font: ${_body1_bold};
+    margin-left: 15px;
+    margin-bottom: 5px;
+  }
+  h3 {
+    margin-top: 0%;
+    font: ${_body1_regular};
+    margin-left: 15px;
   }
 `;
