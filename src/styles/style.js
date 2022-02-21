@@ -120,6 +120,7 @@ export const HomeStyled = styled.div`
     align-items: center;
     justify-content: space-evenly;
     margin-bottom: 50px;
+    cursor: pointer;
     .row1 {
       display: flex;
       width: 100%;
@@ -316,6 +317,7 @@ export const SignInStyled = styled.div`
 export const QuizStyled = styled.div`
   background-color: ${_black};
   height: 100vh;
+  min-height: 700px;
 
   .selected {
     border: 2px solid ${_green};
@@ -326,10 +328,11 @@ export const QuizStyled = styled.div`
   }
 
   .barraDeVida {
+    
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     #myProgress {
       position: relative;
       width: 75%;
@@ -406,11 +409,13 @@ export const BotonValidar = styled.div`
   padding: 15px;
   border-radius: 12px;
   width: 80%;
-  bottom: 30px;
-  position: fixed;
+  bottom: 0px;
+  
+
   font: ${_button_button};
   color: white;
   cursor: pointer;
+  margin-bottom: 50px;
 `;
 export const RespuestaCorrectaStyled = styled.div`
   display: flex;

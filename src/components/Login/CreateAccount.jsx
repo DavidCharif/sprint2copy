@@ -5,7 +5,45 @@ import { fileUpload } from "../../helpers/fileUpload";
 import { url } from "../../helpers/url";
 
 import { SignInStyled } from "../../styles/style";
-
+export const dataPre = {
+  individuales: {
+    HTML: {
+      tiempo: 0,
+      correctAwswers: 0,
+      incorrectAnswers: 0,
+      porcentaje: 0,
+    },
+    CSS: {
+      tiempo: 0,
+      correctAwswers: 0,
+      incorrectAnswers: 0,
+      porcentaje: 0,
+    },
+    FIGMA: {
+      tiempo: 0,
+      correctAwswers: 0,
+      incorrectAnswers: 0,
+      porcentaje: 0,
+    },
+    JS: {
+      tiempo: 0,
+      correctAwswers: 0,
+      incorrectAnswers: 0,
+      porcentaje: 0,
+    },
+    UX: {
+      tiempo: 0,
+      correctAwswers: 0,
+      incorrectAnswers: 0,
+      porcentaje: 0,
+    },
+  },
+  general: {
+    totalCorrectas: 0,
+    totalIncorrectas: 0,
+    tiempoDedicado: 0,
+    preguntasContestadas: 0,
+  }}
 const CreateAccount = () => {
   const navigate = useNavigate();
   const dataPre = {
@@ -49,11 +87,12 @@ const CreateAccount = () => {
     },
   };
   const initialState = {
-    Nombre: "",
+    "user":{Nombre: "",
     Apellido: "",
     Correo: "",
     Password: "",
-    urlImage: "",
+    urlImage: ""}
+  ,
     data: dataPre,
   };
   const [values, setValue] = useState(initialState);

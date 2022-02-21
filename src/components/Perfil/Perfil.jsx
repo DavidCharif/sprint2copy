@@ -16,12 +16,13 @@ const Perfil = () => {
         nombre
         Correo
         cerrar sesion */}
-        <img src={user.dataUser.urlImage} alt="profilePic"></img>
-        <p className='nombre'>{user.dataUser.Nombre} {user.dataUser.Apellido}</p>
-        <p className='correo'>{user.dataUser.Correo}</p>
+        
+        <img src={user.user.urlImage} alt="profilePic"></img>
+        <p className='nombre'>{user.user.Nombre} {user.Apellido}</p>
+        <p className='correo'>{user.user.Correo}</p>
         <button type='button' className='cerrarSesion' onClick={()=>{
           setUser({
-            dataUser:{},loggedIn : false
+            data:{},loggedIn : false
           })
         }}> Cerrar sesión</button>
       </div>

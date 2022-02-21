@@ -6,7 +6,7 @@ import RoutesPerso from "../router/Routes";
 
 
 function App() {
-  const [user, setUser] = useState({dataUser:{}, loggedIn : false})
+  const [user, setUser] = useState({data:{}, loggedIn : false})
 
   return (
     

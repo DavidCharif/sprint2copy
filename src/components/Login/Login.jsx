@@ -16,9 +16,9 @@ const Login = () => {
   const [password, setPassword] = useState("");
   
   const navigate = useNavigate();
-  
+  ;
  console.log(isUser, 'coreo');
- console.log(user.dataUser.Password, 'coreo');
+ 
 
   const handleChange = ({ target }) => {
     const emailValue = target.value;
@@ -39,7 +39,7 @@ const Login = () => {
     validatePassword(passValue)
   };
   const validatePassword = (value) => {
-    if(user.dataUser.Password === value){
+    if(user.user.Password === value){
       setUser(prev => {
         return {...prev , loggedIn : true}})
       navigate('/sprint2copy/home')
@@ -73,7 +73,7 @@ const Login = () => {
         value={password}
         onChange={handleChangePass}
         type="password"
-        placeholder="Ingrese su contrasaeña"
+        placeholder="Ingrese su contraseña"
       ></input>
     </>
   );
@@ -83,10 +83,11 @@ const Login = () => {
 
     // if(data.Correo)
     for (let i = 0; i < data.length; i++) {
-      if (data[i].Correo === email) {
+      if (data[i].user.Correo === email) {
         console.log("Usuario existe");
        
-        setUser({ dataUser: data[i] });
+        setUser({ ...data[i] });
+        console.log(user, 'line 90');
         setIsUser(true)
         break;
       }
