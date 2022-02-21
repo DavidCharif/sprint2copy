@@ -8,14 +8,14 @@ import { Link } from 'react-router-dom'
 const NavBar = () => {
   return (
     <NavBarStyled>
-      <Link to="/home">
+      <Link to="/sprint2copy/home">
       <div className='navBarIcon'><img src={homeIcon} alt="homeIcon"/> <p>Home</p></div>
       </Link>
-      <Link to="/estadisticas">
+      <Link to="/sprint2copy/estadisticas">
       <div className='navBarIcon' ><img src={activityIcon} alt="homeIcon"/> <p>Estadisticas</p></div>
       </Link>
-      <Link to="/perfil">
-      <div className='navBarIcon' as={Link} to="/about"><img src={userIcon} alt="homeIcon"/> <p>Perfil</p></div>
+      <Link to="/sprint2copy/perfil">
+      <div className='navBarIcon' ><img src={userIcon} alt="homeIcon"/> <p>Perfil</p></div>
       </Link>
     </NavBarStyled>
   )

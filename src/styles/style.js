@@ -153,9 +153,8 @@ export const HomeStyled = styled.div`
         background-color: ${_black};
       }
       .fill {
-        
         --fg: ${_green};
-        --bg: #DDDDDD;
+        --bg: #dddddd;
         --pgPercentage: var(--value);
 
         border-radius: 50%;
@@ -198,48 +197,117 @@ export const NavBarStyled = styled.div`
         brightness(107%) contrast(106%);
       margin-top: 5px;
     }
-
+  
     :hover {
       color: ${_green};
       filter: invert(52%) sepia(95%) saturate(331%) hue-rotate(103deg)
         brightness(95%) contrast(88%);
     }
+    :active{
+    color: ${_green};
+      filter: invert(52%) sepia(95%) saturate(331%) hue-rotate(103deg)
+        brightness(95%) contrast(88%);
+   }
     margin: 5px 1px 0px 0px;
   }
 `;
 export const EstadisticasStyled = styled.div`
-background-color: ${_black};
+  background-color: ${_black};
   height: 100vh;
   display: flex;
   color: ${_white};
   flex-direction: column;
-  h3{
-    font : ${_headline_headline2};
-    
-    margin-left:15px;
+  h3 {
+    font: ${_headline_headline2};
+
+    margin-left: 15px;
   }
-  h4{
+  h4 {
     font: ${_body1_regular};
-    margin-left:15px;
+    margin-left: 15px;
   }
-  .bloque{
-    border:1px solid white ;
+  .bloque {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid white;
     border-radius: 8px;
     min-width: 50%;
     margin: 15px;
-    padding: 16px;
+
     font: ${_body1_bold};
+    align-items: center;
+    justify-content: space-around;
+    img {
+      width: 24px;
+      height: 24px;
+    }
+    .correctas {
+      color: ${_green};
+    }
+    .incorrectas {
+      color: ${_red};
+    }
   }
-`
+`;
 export const PerfilStyled = styled.div`
   background-color: ${_black};
   height: 100vh;
   display: flex;
   color: ${_white};
   flex-direction: column;
-  h3{
-    font : ${_headline_headline2};
-    
-    margin-left:15px;
+  h3 {
+    font: ${_headline_headline2};
+
+    margin-left: 15px;
   }
-`
+  .perfilContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .nombre {
+      font: ${_body1_bold};
+      margin-bottom: 0px;
+    }
+    .correo {
+      margin-top: 2px;
+      font: ${_body1_regular};
+    }
+    img {
+      width: 80px;
+      height: 80px;
+    }
+    .cerrarSesion {
+      color: ${_red};
+      background-color: ${_black};
+      font: ${_button_button};
+      border: 0;
+      margin-top: 20px;
+    }
+  }
+`;
+export const SignInStyled = styled.div`
+  background-color: ${_black};
+  height: 100vh;
+  display: flex;
+  color: ${_white};
+  flex-direction: column;
+
+  h3 {
+    font: ${_headline_headline2};
+
+    margin-left: 15px;
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+  .inputText {
+    margin: auto;
+    width: 90%;
+    height: 40px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding-left: 10px;
+    margin-top: 15px;
+  }
+`;

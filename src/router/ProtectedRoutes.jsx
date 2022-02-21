@@ -15,7 +15,7 @@ const ProtectedRoutes = () => {
   const isAuth = useAuth();
   
    return isAuth ? <Outlet /> : 
-   <Navigate to="/" />
+   <Navigate to="/sprint2copy/" />
   
 }
 
