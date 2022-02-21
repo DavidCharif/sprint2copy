@@ -5,7 +5,7 @@ import vidasIcon from "../../guideApp/icons/vidas.png"
 import greenCaracterIcon from "../../guideApp/icons/greenCaracter.png"
 import { useNavigate } from "react-router-dom";
 const Quiz = () => {
-  const [dataGame, setDataGame] = useState({
+  const [dataGame] = useState({
     vidas:4,
     progreso:'0%',
     pregunta:1

@@ -1,4 +1,4 @@
-export const preguntas = {
+export const preguntasHtml = {
   "pregunta1":{
     "pregunta":"¿Qué etiqueta es semánticamente correcta para el contenido principal?",
     "opciones":["main","section","header"],
@@ -15,5 +15,9 @@ export const preguntas = {
     "pregunta":"Organiza la estructura de un documento HTML5",
     "opciones":["<!DOCTYPE HTML>","<body></body>","<head></head>","<hmtl>","</hmtm>"],
     "respuesta":["<!DOCTYPE HTML>","<hmtl>","<head></head>","<body></body>","</hmtm>"]
+  },"pregunta5":{
+    "pregunta":"¿Qué tecnologías pertenece al MEVN Stack?",
+    "opciones":["Angular","Vue.js","Windows","Kotlin"],
+    "respuesta":"Vue.js"
   }
 }
