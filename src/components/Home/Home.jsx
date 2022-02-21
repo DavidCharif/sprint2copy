@@ -11,6 +11,7 @@ import ux from "../../guideApp/languages/ux.png";
 
 
 import { UserContext } from "../../hooks/UserContext";
+import { Link } from "react-router-dom";
 const Home = () => {
   
 
@@ -22,14 +23,20 @@ const { user  } = (useContext(UserContext))
       <h3>Practica tus conocimientos en la categoría que prefieras</h3>
       <div className="opciones">
         <div className="row1">
+        
           <div className="item">
+            
             <div className="fill"  role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style={{'--value':user.dataUser.data.individuales.HTML.porcentaje}}>
             <div className="progressRound">
+            <Link to="/sprint2copy/quiz">
             <img src={html} alt="logo"></img>
+            </Link>
             </div>
+            
               
               
             </div>
+       
             <p>HTML</p>
           </div>
         </div>

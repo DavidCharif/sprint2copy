@@ -197,17 +197,17 @@ export const NavBarStyled = styled.div`
         brightness(107%) contrast(106%);
       margin-top: 5px;
     }
-  
+
     :hover {
       color: ${_green};
       filter: invert(52%) sepia(95%) saturate(331%) hue-rotate(103deg)
         brightness(95%) contrast(88%);
     }
-    :active{
-    color: ${_green};
+    :active {
+      color: ${_green};
       filter: invert(52%) sepia(95%) saturate(331%) hue-rotate(103deg)
         brightness(95%) contrast(88%);
-   }
+    }
     margin: 5px 1px 0px 0px;
   }
 `;
@@ -309,5 +309,58 @@ export const SignInStyled = styled.div`
     box-sizing: border-box;
     padding-left: 10px;
     margin-top: 15px;
+  }
+`;
+export const QuizStyled = styled.div`
+  background-color: ${_black};
+  height: 100vh;
+  
+ 
+  
+  .barraDeVida {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    #myProgress {
+    position: relative;
+    width: 75%;
+    height: 12px;
+    background-color: ${_white};
+    
+    border-radius:20px
+  }
+  img {
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+  p{
+    font:${_body1_bold};
+    color:white;
+  }
+  #myBar {
+    position: absolute;
+    width: var(--fill);
+    height: 100%;
+    background-color: ${_green};
+    border-radius:20px;
+  }
+ 
+  }
+  .pregunta{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    p{
+      font: ${_headline_headline2};
+      width: 70%;
+      color: ${_white};
+    }
+    img{
+      width:75px;
+      height: 160px;
+    }
   }
 `;
