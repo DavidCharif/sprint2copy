@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { LoginStyled } from "../../styles/style";
+import { Flex, LoginStyled } from "../../styles/style";
 import logoPurple from "../../guideApp/images/logoContainerPurple.png";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { Link,  useNavigate } from "react-router-dom";
@@ -7,9 +7,10 @@ import validator from "validator";
 import useFetch from "react-fetch-hook";
 import { url } from "../../helpers/url";
 import { UserContext } from "../../hooks/UserContext";
+import Loading from "../Loading/Loading";
 
 const Login = () => {
-  const { data } = useFetch(url);
+  const { data, isLoading } = useFetch(url);
   const { user, setUser } = useContext(UserContext);
   const [correo, setCorreo] = useState("");
   const [isUser, setIsUser] = useState(false);
@@ -17,9 +18,11 @@ const Login = () => {
   
   const navigate = useNavigate();
   ;
- console.log(isUser, 'coreo');
+ console.log(isUser, 'isUser');
  
-
+if(isLoading){
+  return <Loading/>
+}
   const handleChange = ({ target }) => {
     const emailValue = target.value;
     const isValid = validarEmail(emailValue);
@@ -29,7 +32,7 @@ const Login = () => {
       UserEmailExist(emailValue);
     } else {
       setCorreo((c) => (c = emailValue));
-      console.log("NO valido");
+      console.log("No valido");
     }
   };
   const handleChangePass = ({ target }) => {
@@ -93,15 +96,10 @@ const Login = () => {
       }
     }
   };
-  const validarEmail = (email) => {
-    if (validator.isEmail(email)) {
-      return true;
-    } else {
-      return false;
-    }
-  };
+  const validarEmail = (email) => validator.isEmail(email);
 
   return (
+    <Flex>
     <LoginStyled>
       <img src={logoPurple} alt="logo"></img>
       <h1>Iniciar sesión</h1>
@@ -120,6 +118,7 @@ const Login = () => {
         <Link to={"/sprint2copy/signin"}> Inscribirse</Link>
       </div>
     </LoginStyled>
+    </Flex>
   );
 };
 

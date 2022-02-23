@@ -6,4 +6,5 @@ html, body {
   height:100%;
   font-family: 'Nunito', sans-serif;
   font: var(--body1-regular);
+  background-color: #16161a;
 }

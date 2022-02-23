@@ -15,6 +15,7 @@ const RoutesPerso = () => {
     
     <Routes>
       <Route path="/sprint2copy/" element={<Login />} />
+      <Route path="/*" element={<Navigate to="/sprint2copy/"/>} />
       <Route path="/sprint2copy/signin" element={<CreateAccount />} />
      
       <Route path="/sprint2copy/*" element={<Navigate to="/sprint2copy/"/>}/>

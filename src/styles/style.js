@@ -30,13 +30,20 @@ export const LoadingStyled = styled.div`
   align-items: center;
   justify-content: center;
 `;
-export const LoginStyled = styled.div`
+export const Flex = styled.div`
   background-color: ${_black};
   height: 100vh;
+  display: flex;
+`;
+
+export const LoginStyled = styled.div`
+  height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  gap: 5px;
   h1 {
     font: ${_headline_headline1};
     color: ${_white};
@@ -46,6 +53,7 @@ export const LoginStyled = styled.div`
     height: 80px;
   }
   .button {
+    max-width: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -66,6 +74,7 @@ export const LoginStyled = styled.div`
     }
   }
   .correoElectronico {
+    max-width: 600px;
     margin-top: 20px;
     width: 90%;
     border-top: 1px solid white;
@@ -80,6 +89,7 @@ export const LoginStyled = styled.div`
     border-radius: 8px;
     box-sizing: border-box;
     padding-left: 10px;
+    max-width: 600px;
   }
   .forgottenPassword {
     margin-top: 25px;
@@ -119,7 +129,7 @@ export const HomeStyled = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    margin-bottom: 50px;
+
     cursor: pointer;
     .row1 {
       display: flex;
@@ -144,9 +154,15 @@ export const HomeStyled = styled.div`
       min-width: 96px;
       min-height: 128px;
       img {
-        min-height: 64px;
-        min-width: 64px;
+        height: 64px;
+        width: 64px;
+        border-radius: 50%;
         margin: 5px;
+        @media (min-width: 650px) {
+          height: 128px;
+          width: 128px;
+          border-radius: 104px;
+        }
       }
       .progressRound {
         border-radius: 100%;
@@ -154,6 +170,11 @@ export const HomeStyled = styled.div`
         width: 74px;
         margin: 10px;
         background-color: ${_black};
+        @media (min-width: 650px) {
+          height: 138px;
+          width: 138px;
+          border-radius: 100px;
+        }
       }
       .fill {
         --fg: ${_green};
@@ -316,19 +337,27 @@ export const SignInStyled = styled.div`
 `;
 export const QuizStyled = styled.div`
   background-color: ${_black};
-  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
   min-height: 700px;
-
+  width: 100%;
   .selected {
     border: 2px solid ${_green};
   }
-  .wrong {
-    border: 2px solid ${_green};
-    background-color: ${_red};
+
+  .respuestas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .wrong {
+      border: 2px solid ${_red};
+    }
   }
 
   .barraDeVida {
-    
+    margin-top: 30px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -372,11 +401,21 @@ export const QuizStyled = styled.div`
       width: 75px;
       height: 160px;
     }
+    @media (min-width: 700px) {
+      p {
+        font-size: 40px;
+        margin: 0%;
+      }
+    }
   }
   .boton {
     display: flex;
     justify-content: center;
     text-align: center;
+    margin-top: 50px;
+    @media (min-width: 700px) {
+      margin-top: 155px;
+    }
   }
   .isSelected {
     background-color: ${_purple};
@@ -389,9 +428,10 @@ export const BotonRespuestas = styled.div`
   min-height: 56px;
   min-width: 328px;
   background-color: ${_neutral};
-  margin: 15px;
+  margin: 5px;
   border: 2px solid ${_white};
-  border-radius: 4px;
+  border-radius: 9px;
+
   cursor: pointer;
   img {
     width: 20px;
@@ -403,6 +443,14 @@ export const BotonRespuestas = styled.div`
     color: ${_white};
     margin-left: 30px;
   }
+
+  @media (min-width: 700px) {
+    width: 700px;
+
+    p {
+      font-size: 30px;
+    }
+  }
 `;
 export const BotonValidar = styled.div`
   background-color: #d4caf3;
@@ -410,12 +458,15 @@ export const BotonValidar = styled.div`
   border-radius: 12px;
   width: 80%;
   bottom: 0px;
-  
 
   font: ${_button_button};
   color: white;
   cursor: pointer;
-  margin-bottom: 50px;
+  margin-bottom: 15px;
+  @media (min-width: 700px) {
+    width: 700px;
+    padding: 30px;
+  }
 `;
 export const RespuestaCorrectaStyled = styled.div`
   display: flex;

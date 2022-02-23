@@ -18,7 +18,7 @@ const Perfil = () => {
         cerrar sesion */}
         
         <img src={user.user.urlImage} alt="profilePic"></img>
-        <p className='nombre'>{user.user.Nombre} {user.Apellido}</p>
+        <p className='nombre'>{user.user.Nombre} {user.user.Apellido}</p>
         <p className='correo'>{user.user.Correo}</p>
         <button type='button' className='cerrarSesion' onClick={()=>{
           setUser({

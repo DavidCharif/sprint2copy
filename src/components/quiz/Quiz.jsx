@@ -1,7 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   BotonRespuestas,
   BotonValidar,
+  Flex,
   QuizStyled,
   RespuestaCorrectaStyled,
   RespuestaIncorrectaStyled,
@@ -17,6 +18,8 @@ const emptyCircle =
   "https://res.cloudinary.com/davidcharif/image/upload/v1645422545/circleQuestion_xkknmk.png";
 const fullCircle =
   "https://res.cloudinary.com/davidcharif/image/upload/v1645422561/correctAnswer_gavmxd.png";
+const wrongCircle =
+  "https://res.cloudinary.com/davidcharif/image/upload/v1645620785/wrongAnswer_ziffe5.png";
 
 const Quiz = () => {
   const { setUser } = useContext(UserContext);
@@ -33,45 +36,48 @@ const Quiz = () => {
   const [incorrectAnswersTotal, setIncorrectAnswersTotal] = useState(0);
 
   const handleAnswers = () => {
-  
-
     const respuesta = preguntasHtml[pregunta].respuesta;
 
     if (currentAnswer.length === 0) {
-      return "Select an answer";
+      return console.log("Select an answer");
     }
     if (currentAnswer.length > 0) {
-      if(currentAnswer === respuesta){
+      if (currentAnswer === respuesta) {
+       
         setCorrectAnswersTotal((e) => e + 1);
       } else {
+        let respuestas = document.getElementsByClassName('respuesta')
+        
+        for(let i=0; i < respuestas.length; i++) {
+          console.log(respuestas[i]);
+          if (respuestas[i].classList.contains('selected')){
+            respuestas[i].lastChild.src = wrongCircle
+            respuestas[i].classList.remove('selected')
+            respuestas[i].classList+=(' wrong')
+          }
+        }
         setIncorrectAnswersTotal((e) => e + 1);
-      };
-   
+      }
     }
-    setValidateAnswer(currentAnswer === respuesta)
- 
-   
+    setValidateAnswer(currentAnswer === respuesta);
   };
   const gameManager = () => {
-    
-    
     if (numeroPreguntas === 0) {
-      if(validateAnswer) {
-      setVidas((e) => e);
-      setProgreso((e) => (e += 20));
-      setCurrentAnswer("");
-      setValidateAnswer(undefined);
-      clearSelection();
-      setCorrectAnswersTotal((e) => e + 1);
+      if (validateAnswer) {
+        setProgreso((e) => (e += 20));
+        setCurrentAnswer("");
+        setValidateAnswer(undefined);
+        clearSelection();
+        
       } else {
         setVidas((e) => e - 1);
         setProgreso((e) => (e += 20));
         setCurrentAnswer("");
         setValidateAnswer(undefined);
-        setIncorrectAnswersTotal((e) => e + 1);
+        
         clearSelection();
       }
-    
+
       let HTML = {
         correctAnswers: correctAnswersTotal,
         incorrectAnswers: incorrectAnswersTotal,
@@ -86,40 +92,35 @@ const Quiz = () => {
       };
       dataPre.individuales.HTML = HTML;
       dataPre.general = general;
-      
+
       setUser((prev) => ({
         ...prev,
         data: { ...dataPre },
       }));
-      return navigate(-1)
+      return navigate(-1);
     }
 
     if (validateAnswer) {
-      
-      setProgreso((e) => (e + 20));
-      setNumeroPreguntas((e) => (e - 1));
-      setPregunta((e) => (e + 1));
-      
+      setProgreso((e) => e + 20);
+      setNumeroPreguntas((e) => e - 1);
+      setPregunta((e) => e + 1);
+
       setCurrentAnswer("");
       setValidateAnswer(undefined);
-     
-      
+
       clearSelection();
     } else {
-     
       setVidas((e) => e - 1);
-      setNumeroPreguntas((e) => (e - 1));
-      setProgreso((e) => (e + 20));
-      setPregunta((e) => (e + 1));
+      setNumeroPreguntas((e) => e - 1);
+      setProgreso((e) => e + 20);
+      setPregunta((e) => e + 1);
       setCurrentAnswer("");
       setValidateAnswer(undefined);
       clearSelection();
     }
 
-
-    console.log('correctAnswersTotal', correctAnswersTotal)
-    console.log('IncorrectAnswersTotal', incorrectAnswersTotal)
-    ;
+    console.log("correctAnswersTotal", correctAnswersTotal);
+    console.log("IncorrectAnswersTotal", incorrectAnswersTotal);
   };
   const clearSelection = () => {
     let arrayRespuesta = document.getElementsByClassName("respuesta");
@@ -129,15 +130,22 @@ const Quiz = () => {
       if (arrayRespuesta[i].classList.contains("selected")) {
         arrayRespuesta[i].classList.remove("selected");
         arrayRespuesta[i].lastChild.src = emptyCircle;
+      } if (arrayRespuesta[i].classList.contains("wrong")){
+        arrayRespuesta[i].classList.remove("wrong");
+        arrayRespuesta[i].lastChild.src = emptyCircle;
       }
     }
   };
   const handleSelection = ({ target }) => {
     let boton = document.getElementById("boton");
     clearSelection();
+
     let value = target.getAttribute("value");
-    target.className += " selected";
-    target.lastChild.src = fullCircle;
+    if (target.classList.contains("respuesta")) {
+      target.className += " selected";
+      target.lastChild.src = fullCircle;
+    }
+
     if (target.classList.contains("selected")) {
       boton.classList += " isSelected";
     }
@@ -160,53 +168,61 @@ const Quiz = () => {
       </div>
     </RespuestaIncorrectaStyled>
   );
+  useEffect(() => {
+    console.log("primer ejecutado");
+    if (vidas === 0) {
+      alert("Perdiste");
+    }
+  }, [vidas]);
 
   return (
-    <QuizStyled>
-      <div className="barraDeVida">
-        <img
-          src={closeIcon}
-          alt="close icon"
-          onClick={() => {
-            navigate(-1);
-          }}
-        ></img>
-        <div id="myProgress">
-          <div id="myBar" style={{ "--fill": `${progreso}%` }}></div>
+    <Flex>
+      <QuizStyled>
+        <div className="barraDeVida">
+          <img
+            src={closeIcon}
+            alt="close icon"
+            onClick={() => {
+              navigate(-1);
+            }}
+          ></img>
+          <div id="myProgress">
+            <div id="myBar" style={{ "--fill": `${progreso}%` }}></div>
+          </div>
+          <img src={vidasIcon} alt="iconoDeVidas" />
+          <p>{vidas}</p>
         </div>
-        <img src={vidasIcon} alt="iconoDeVidas" />
-        <p>{vidas}</p>
-      </div>
-      <div className="pregunta">
-        <img src={preguntasHtml[pregunta].imgUrl} alt="greenCharacter" />
-        <p>{preguntasHtml[pregunta].pregunta}</p>
-      </div>
-      <div className="respuestas">
-        {preguntasHtml[pregunta].opciones.map((opcion, index) => {
-          return (
-            <BotonRespuestas
-              className="respuesta"
-              key={index}
-              value={opcion}
-              onClick={handleSelection}
-            >
-              <p>{opcion}</p>
-              <img src={emptyCircle} alt="circle"></img>
-            </BotonRespuestas>
-          );
-        })}
-      </div>
-      <div className="boton">
-        <BotonValidar id="boton" onClick={handleAnswers}>
-          COMPROBAR
-        </BotonValidar>
-      </div>
-      {validateAnswer !== undefined
-        ? validateAnswer === true
-          ? RespuestaCorrecta
-          : RespuestaIncorrecta
-        : ""}
-    </QuizStyled>
+        <div className="pregunta">
+          <img src={preguntasHtml[pregunta].imgUrl} alt="greenCharacter" />
+          <p>{preguntasHtml[pregunta].pregunta}</p>
+        </div>
+        <div className="respuestas">
+          {preguntasHtml[pregunta].opciones.map((opcion, index) => {
+            return (
+              <BotonRespuestas
+                className="respuesta"
+                key={index}
+                value={opcion}
+                onClick={handleSelection}
+              >
+                <p>{opcion}</p>
+                <img src={emptyCircle} alt="circle"></img>
+              </BotonRespuestas>
+            );
+          })}
+        </div>
+        <div className="boton">
+          <BotonValidar id="boton" onClick={handleAnswers}>
+            COMPROBAR
+          </BotonValidar>
+        </div>
+        {validateAnswer !== undefined
+          ? validateAnswer === true
+            ? RespuestaCorrecta
+            : RespuestaIncorrecta
+          : ""}
+      </QuizStyled>
+    </Flex>
   );
 };
 

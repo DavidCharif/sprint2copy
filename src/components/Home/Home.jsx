@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { HomeStyled } from "../../styles/style";
 import NavBar from "../NavBar/NavBar";
-import html from "../../guideApp/languages/html.png";
-import css from "../../guideApp/languages/css.png";
-import figma from "../../guideApp/languages/figma.png";
+import html from "../../guideApp/languages/htmlHQ.png";
+import css from "../../guideApp/languages/cssHQ.png";
+import figma from "../../guideApp/languages/figmaHQ.png";
 
-import js from "../../guideApp/languages/js.png";
+import js from "../../guideApp/languages/jsHQ.png";
 import ux from "../../guideApp/languages/ux.png";
 
 
@@ -16,7 +16,7 @@ const Home = () => {
   
 
   
-const { user,  setUser  } = (useContext(UserContext))
+const { user } = (useContext(UserContext))
 console.log(user);
 // HTML = {
 //   correctAnswers: 5,
