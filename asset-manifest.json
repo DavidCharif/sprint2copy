@@ -1,20 +1,13 @@
 {
   "files": {
     "main.css": "/sprint2copy/static/css/main.9ce037ed.css",
-    "main.js": "/sprint2copy/static/js/main.9f8a889e.js",
-    "static/media/cssHQ.png": "/sprint2copy/static/media/cssHQ.8890515968c8df2fec4a.png",
-    "static/media/htmlHQ.png": "/sprint2copy/static/media/htmlHQ.cd79e391ce60925e740e.png",
-    "static/media/figmaHQ.png": "/sprint2copy/static/media/figmaHQ.ddaea9f7f1600efa8905.png",
-    "static/media/jsHQ.png": "/sprint2copy/static/media/jsHQ.621f6061172a58343b60.png",
+    "main.js": "/sprint2copy/static/js/main.a1793274.js",
     "index.html": "/sprint2copy/index.html",
-    "static/media/user.svg": "/sprint2copy/static/media/user.1feb859350973e21965fd2f11988e46e.svg",
-    "static/media/home.svg": "/sprint2copy/static/media/home.d82d8ae2206b588228eed80f84b17e22.svg",
-    "static/media/activity.svg": "/sprint2copy/static/media/activity.6180286fa0c35db6cc7991bef84d65f0.svg",
     "main.9ce037ed.css.map": "/sprint2copy/static/css/main.9ce037ed.css.map",
-    "main.9f8a889e.js.map": "/sprint2copy/static/js/main.9f8a889e.js.map"
+    "main.a1793274.js.map": "/sprint2copy/static/js/main.a1793274.js.map"
   },
   "entrypoints": [
     "static/css/main.9ce037ed.css",
-    "static/js/main.9f8a889e.js"
+    "static/js/main.a1793274.js"
   ]
 }
