@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../../hooks/UserContext';
-import { PerfilStyled } from '../../styles/style'
+import { PerfilStyled } from "../../styles/PerfilStyled";
 import NavBar from '../NavBar/NavBar';
 
 
 const Perfil = () => {
-  const { user, setUser } = (useContext(UserContext))
+  const { user, setLogin } = (useContext(UserContext))
   console.log('data desde perfil' , user);
   return (
     <>
@@ -17,13 +17,14 @@ const Perfil = () => {
         Correo
         cerrar sesion */}
         
-        <img src={user.user.urlImage} alt="profilePic"></img>
-        <p className='nombre'>{user.user.Nombre} {user.user.Apellido}</p>
-        <p className='correo'>{user.user.Correo}</p>
+        <img src={user.urlImage} alt="profilePic"></img>
+        <p className='nombre'>{user.Nombre} {user.Apellido}</p>
+        <p className='correo'>{user.Correo}</p>
         <button type='button' className='cerrarSesion' onClick={()=>{
-          setUser({
-            data:{},loggedIn : false
-          })
+          // setUser({
+          //   data:{},loggedIn : false
+          // })
+          setLogin(false)
         }}> Cerrar sesión</button>
       </div>
       

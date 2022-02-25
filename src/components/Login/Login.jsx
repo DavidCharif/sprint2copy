@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Flex, LoginStyled } from "../../styles/style";
-import logoPurple from "../../guideApp/images/logoContainerPurple.png";
+
 import { AiOutlineGoogle } from "react-icons/ai";
 import { Link,  useNavigate } from "react-router-dom";
 import validator from "validator";
@@ -8,10 +7,13 @@ import useFetch from "react-fetch-hook";
 import { url } from "../../helpers/url";
 import { UserContext } from "../../hooks/UserContext";
 import Loading from "../Loading/Loading";
+import { Flex } from "../../styles/Flex";
+import { LoginStyled } from "../../styles/LoginStyled";
 
+const logoPurple = "https://res.cloudinary.com/davidcharif/image/upload/v1645632540/sprint2/design/images/logoContainerPurple_tnjgqa.png";
 const Login = () => {
   const { data, isLoading } = useFetch(url);
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser,dataGame, setDataGame, setLogin, setLocalId } = useContext(UserContext);
   const [correo, setCorreo] = useState("");
   const [isUser, setIsUser] = useState(false);
   const [password, setPassword] = useState("");
@@ -42,9 +44,12 @@ if(isLoading){
     validatePassword(passValue)
   };
   const validatePassword = (value) => {
-    if(user.user.Password === value){
-      setUser(prev => {
-        return {...prev , loggedIn : true}})
+    console.log(dataGame, 'validata');
+    if(user.Password === value){
+      // setUser(prev => {
+      //   return {...prev , loggedIn : true}})
+      setLogin(e => e = true)
+     
       navigate('/sprint2copy/home')
     } else {
       console.log("Contraseña incorrecta")
@@ -87,10 +92,12 @@ if(isLoading){
     // if(data.Correo)
     for (let i = 0; i < data.length; i++) {
       if (data[i].user.Correo === email) {
-        console.log("Usuario existe");
-       
-        setUser({ ...data[i] });
-        console.log(user, 'line 90');
+        console.log(data[i], 'data I');
+        const { id, user, dataDailyBits}= data[i] 
+        console.log('dataDaily', dataDailyBits);
+        setUser({ ...user});
+        setLocalId(id)
+        setDataGame({ ...dataDailyBits});
         setIsUser(true)
         break;
       }

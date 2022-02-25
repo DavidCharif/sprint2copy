@@ -3,37 +3,46 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fileUpload } from "../../helpers/fileUpload";
 import { url } from "../../helpers/url";
+import { SignInStyled } from "../../styles/SignInStyled";
 
-import { SignInStyled } from "../../styles/style";
 export const dataPre = {
   individuales: {
     HTML: {
-      tiempo: 0,
-      correctAwswers: 0,
+      tiempo: {
+        segundos: 0,
+        minutos: 0,
+      },
+      correctAnswers: 0,
       incorrectAnswers: 0,
       porcentaje: 0,
     },
     CSS: {
-      tiempo: 0,
-      correctAwswers: 0,
+      tiempo: {
+        segundos: 0,
+        minutos: 0,
+      },
+      correctAnswers: 0,
       incorrectAnswers: 0,
       porcentaje: 0,
     },
     FIGMA: {
       tiempo: 0,
-      correctAwswers: 0,
+      correctAnswers: 0,
       incorrectAnswers: 0,
       porcentaje: 0,
     },
     JS: {
       tiempo: 0,
-      correctAwswers: 0,
+      correctAnswers: 0,
       incorrectAnswers: 0,
       porcentaje: 0,
     },
     UX: {
-      tiempo: 0,
-      correctAwswers: 0,
+      tiempo: {
+        segundos: 0,
+        minutos: 0,
+      },
+      correctAnswers: 0,
       incorrectAnswers: 0,
       porcentaje: 0,
     },
@@ -41,9 +50,14 @@ export const dataPre = {
   general: {
     totalCorrectas: 0,
     totalIncorrectas: 0,
-    tiempoDedicado: 0,
+    tiempoDedicado: {
+      segundos: 0,
+      minutos: 0,
+      horas: 0,
+    },
     preguntasContestadas: 0,
-  }}
+  },
+};
 const CreateAccount = () => {
   const navigate = useNavigate();
   const dataPre = {
@@ -87,12 +101,7 @@ const CreateAccount = () => {
     },
   };
   const initialState = {
-    "user":{Nombre: "",
-    Apellido: "",
-    Correo: "",
-    Password: "",
-    urlImage: ""}
-  ,
+    user: { Nombre: "", Apellido: "", Correo: "", Password: "", urlImage: "" },
     data: dataPre,
   };
   const [values, setValue] = useState(initialState);

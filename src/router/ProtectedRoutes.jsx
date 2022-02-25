@@ -4,10 +4,9 @@ import { UserContext } from '../hooks/UserContext';
 
 
 const useAuth = () => {
-  const {user} = useContext(UserContext);
-  console.log('user auth', user);
-  return user && user.loggedIn
-}
+  const {login} = useContext(UserContext);
+  console.log('user auth', login);
+  return login}
 
 
 const ProtectedRoutes = () => {

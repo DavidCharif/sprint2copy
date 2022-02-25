@@ -1,11 +1,13 @@
-import { LoadingStyled } from '../../styles/style'
+import { LoadingStyled } from "../../styles/LoadingStyled";
 
-import logoWhite from '../../guideApp/images/logoWhite.png'
-
+const logoWhite =
+  "https://res.cloudinary.com/davidcharif/image/upload/v1645632540/sprint2/design/images/logoWhite_avwyhc.png";
 const Loading = () => {
   return (
-    <LoadingStyled><img src={logoWhite} alt='logo'/></LoadingStyled>
-  )
-}
+    <LoadingStyled>
+      <img src={logoWhite} alt="logo" />
+    </LoadingStyled>
+  );
+};
 
-export default Loading
+export default Loading;

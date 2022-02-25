@@ -6,11 +6,16 @@ import RoutesPerso from "../router/Routes";
 
 
 function App() {
-  const [user, setUser] = useState({data:{}, loggedIn : false})
-
+  const [login, setLogin] = useState(false)
+  const [user, setUser] = useState({})
+  const [dataGame,setDataGame] = useState({})
+  const [localId,setLocalId] = useState(0)
+  const states = {
+    login, setLogin, user, setUser, dataGame, setDataGame, localId, setLocalId
+  }
   return (
     
-    <UserContext.Provider value={{user, setUser}}>
+    <UserContext.Provider value={{...states}}>
         <RoutesPerso/>        
     </UserContext.Provider>
      
