@@ -12,7 +12,7 @@ const Estadisticas = () => {
   return (
     <>
     <EstadisticasStyled>
-      <div>
+      <div className='bloquePerfil'>
         <h3>Estadisticas</h3>
         <h4>Los ultimos 7 dias</h4>
         

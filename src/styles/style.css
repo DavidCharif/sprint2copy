@@ -3,7 +3,7 @@
 }
 html, body {
   margin:0px;
-  height:100%;
+  height:100vh;
   font-family: 'Nunito', sans-serif;
   font: var(--body1-regular);
   background-color: #16161a;

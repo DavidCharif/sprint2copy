@@ -17,7 +17,7 @@ const Login = () => {
   const [correo, setCorreo] = useState("");
   const [isUser, setIsUser] = useState(false);
   const [password, setPassword] = useState("");
-  
+  console.log(data);
   const navigate = useNavigate();
   ;
  console.log(isUser, 'isUser');

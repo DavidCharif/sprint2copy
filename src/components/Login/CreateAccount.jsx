@@ -60,58 +60,26 @@ export const dataPre = {
 };
 const CreateAccount = () => {
   const navigate = useNavigate();
-  const dataPre = {
-    individuales: {
-      HTML: {
-        tiempo: 0,
-        correctAwswers: 0,
-        incorrectAnswers: 0,
-        porcentaje: 0,
-      },
-      CSS: {
-        tiempo: 0,
-        correctAwswers: 0,
-        incorrectAnswers: 0,
-        porcentaje: 0,
-      },
-      FIGMA: {
-        tiempo: 0,
-        correctAwswers: 0,
-        incorrectAnswers: 0,
-        porcentaje: 0,
-      },
-      JS: {
-        tiempo: 0,
-        correctAwswers: 0,
-        incorrectAnswers: 0,
-        porcentaje: 0,
-      },
-      UX: {
-        tiempo: 0,
-        correctAwswers: 0,
-        incorrectAnswers: 0,
-        porcentaje: 0,
-      },
-    },
-    general: {
-      totalCorrectas: 0,
-      totalIncorrectas: 0,
-      tiempoDedicado: 0,
-      preguntasContestadas: 0,
-    },
-  };
+  
   const initialState = {
     user: { Nombre: "", Apellido: "", Correo: "", Password: "", urlImage: "" },
-    data: dataPre,
+    dataDailyBits: dataPre,
   };
   const [values, setValue] = useState(initialState);
 
   const handleInputChange = ({ target }) => {
     console.log(target.value);
-    setValue({
-      ...values,
-      [target.name]: target.value,
-    });
+    console.log(values);
+    // setValue({
+    //   ...values,
+    //   [target.name]: target.value,
+    // });
+    setValue(prev => ({
+      ...prev,user : {
+          ...prev.user,[target.name]: target.value
+        }
+      
+    }));
   };
 
   const postData = () => {
@@ -129,7 +97,12 @@ const CreateAccount = () => {
     const file = e.target.files[0];
     fileUpload(file)
       .then((res) => {
-        values.urlImage = res;
+        setValue(prev => ({
+          ...prev,user : {
+            ...prev.user,urlImage: res
+          }
+        }))
+        
       })
       .catch((error) => console.log(error.message));
   };
@@ -174,8 +147,8 @@ const CreateAccount = () => {
         <input
           className="inputText"
           name="Password"
-          value={values.Nombre}
-          onChange={handleInputChange}
+          value={values.Password}
+          // onChange={handleInputChange}
           type="text"
         />
         <label>Imagen</label>

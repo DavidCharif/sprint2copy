@@ -27,6 +27,9 @@ const vidasIcon =
 const Quiz = () => {
   const location = useLocation()
   let { from, dataIndividual,  dataGeneral } = location.state
+  let {tiempo:{segundos, minutos} /*, correctAnswers, incorrectAnswers, porcentaje */ } =   dataIndividual
+  
+  let {tiempoDedicado:{segundosGenerales, minutosGenerales}, preguntasContestadas, totalCorrectas, totalIncorrectas } =  dataGeneral
   
   //use reducer
   const { dataGame, setDataGame, localId, user } = useContext(UserContext);
@@ -100,8 +103,8 @@ const Quiz = () => {
     setValidateAnswer(currentAnswer === respuesta);
   };
   const addNewData = () => {
-  let {tiempo:{segundos, minutos} /*, correctAnswers, incorrectAnswers, porcentaje */ } =   dataIndividual
-    let {tiempoDedicado:{segundosGenerales, minutosGenerales}, preguntasContestadas, totalCorrectas, totalIncorrectas } =  dataGeneral
+
+    console.log('segundosGenerales', segundosGenerales)
     let newSeconds = segundos + segundosState;
     let newMinutos = minutos + minutosState;
     let newCorrectAnswers =  correctAnswersTotal;
@@ -113,7 +116,7 @@ const Quiz = () => {
     let newTotalCorrectas =  totalCorrectas + newCorrectAnswers
     let newTotalIncorrectas = totalIncorrectas + newIncorrectAnswers
 
-console.log('newPorcentage', newPorcentage)
+    console.log('pro', progreso)
     let newData = {
       "tiempo": {
         "segundos": newSeconds,
@@ -152,17 +155,18 @@ console.log('USUARIO ACTUALIZADO');
   const gameManager = () => {
   console.log('numeroPreguntas', numeroPreguntas);
    setNumeroPreguntas((e) => e - 1);
+   setProgreso((e) => e + 20);
     if (numeroPreguntas === 0) {
       if (validateAnswer) {
         
         setCurrentAnswer("");
         setValidateAnswer(undefined);
-        setProgreso((e) => e + 20);
+        
      
         clearSelection();
       } else {
         setVidas((e) => e - 1);
-        setProgreso((e) => (e + 20));
+       
         setCurrentAnswer("");
         setValidateAnswer(undefined);
 
