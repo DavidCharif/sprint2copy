@@ -1,7 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import { useNavigate, useLocation } from "react-router-dom";
-import { preguntasFigma, preguntasHtml, preguntasJs, preguntasUx } from "../quiz/quizData";
+import {
+  preguntasFigma,
+  preguntasHtml,
+  preguntasJs,
+  preguntasUx,
+} from "../quiz/quizData";
 import { preguntasCss } from "../quiz/quizData";
 import { UserContext } from "../../hooks/UserContext";
 
@@ -25,46 +30,56 @@ const vidasIcon =
   "https://res.cloudinary.com/davidcharif/image/upload/v1645632538/sprint2/design/icons/vidas_lzf9oh.png";
 
 const Quiz = () => {
-  const location = useLocation()
-  let { from, dataIndividual,  dataGeneral } = location.state
-  let {tiempo:{segundos, minutos} /*, correctAnswers, incorrectAnswers, porcentaje */ } =   dataIndividual
-  
-  let {tiempoDedicado:{segundosGenerales, minutosGenerales}, preguntasContestadas, totalCorrectas, totalIncorrectas } =  dataGeneral
-  
+  const location = useLocation();
+  let { from, dataIndividual, dataGeneral } = location.state;
+  let {
+    tiempo: {
+      segundos,
+      minutos,
+    } /*, correctAnswers, incorrectAnswers, porcentaje */,
+  } = dataIndividual;
+
+  let {
+    tiempoDedicado: { segundosGenerales, minutosGenerales },
+    preguntasContestadas,
+    totalCorrectas,
+    totalIncorrectas,
+  } = dataGeneral;
+
   //use reducer
   const { dataGame, setDataGame, localId, user } = useContext(UserContext);
   const [vidas, setVidas] = useState(4);
-  const [segundosState, setSegundosState] = useState(0)
-  const [minutosState, setMinutosState] = useState(0)
+  const [segundosState, setSegundosState] = useState(0);
+  const [minutosState, setMinutosState] = useState(0);
   const [progreso, setProgreso] = useState(0);
   const [pregunta, setPregunta] = useState(1);
- let preguntas;
- let quiz;
+  let preguntas;
+  let quiz;
 
-  switch(from){
+  switch (from) {
     case "HTML":
-      preguntas = preguntasHtml
-      quiz = 'HTML'
-      break
+      preguntas = preguntasHtml;
+      quiz = "HTML";
+      break;
     case "CSS":
-      preguntas = preguntasCss
-      quiz = 'CSS'
-      break
+      preguntas = preguntasCss;
+      quiz = "CSS";
+      break;
     case "FIGMA":
-      preguntas = preguntasFigma
-      quiz = 'FIGMA'
-      break
+      preguntas = preguntasFigma;
+      quiz = "FIGMA";
+      break;
     case "JS":
-      preguntas = preguntasJs
-      quiz = 'JS'
-      break
+      preguntas = preguntasJs;
+      quiz = "JS";
+      break;
     case "UX":
-      preguntas = preguntasUx
-      quiz = 'UX'
-      break
-      default:
-        console.log('Error');
-        break
+      preguntas = preguntasUx;
+      quiz = "UX";
+      break;
+    default:
+      console.log("Error");
+      break;
   }
   const [numeroPreguntas, setNumeroPreguntas] = useState(
     Object.keys(preguntas).length - 1
@@ -74,12 +89,10 @@ const Quiz = () => {
   const [validateAnswer, setValidateAnswer] = useState(undefined);
   const [correctAnswersTotal, setCorrectAnswersTotal] = useState(0);
   const [incorrectAnswersTotal, setIncorrectAnswersTotal] = useState(0);
-  
-  
-  const handleAnswers = () => {
-    
-    const respuesta = preguntas[pregunta].respuesta;
 
+  const handleAnswers = () => {
+    const respuesta = preguntas[pregunta].respuesta;
+    setProgreso((e) => e + 20);
     if (currentAnswer.length === 0) {
       return console.log("Select an answer");
     }
@@ -90,7 +103,6 @@ const Quiz = () => {
         let respuestas = document.getElementsByClassName("respuesta");
 
         for (let i = 0; i < respuestas.length; i++) {
-        
           if (respuestas[i].classList.contains("selected")) {
             respuestas[i].lastChild.src = wrongCircle;
             respuestas[i].classList.remove("selected");
@@ -103,102 +115,89 @@ const Quiz = () => {
     setValidateAnswer(currentAnswer === respuesta);
   };
   const addNewData = () => {
-
-    console.log('segundosGenerales', segundosGenerales)
+    console.log("segundosGenerales", segundosGenerales);
     let newSeconds = segundos + segundosState;
     let newMinutos = minutos + minutosState;
-    let newCorrectAnswers =  correctAnswersTotal;
-    let newIncorrectAnswers =  incorrectAnswersTotal;
-    let newPorcentage = progreso
-    let newSegundosGenerales = segundosGenerales + segundosState
-    let newMinutosGenerales = minutosGenerales + minutosState
-    let newPreguntasContestadas = preguntasContestadas + (pregunta - 1)
-    let newTotalCorrectas =  totalCorrectas + newCorrectAnswers
-    let newTotalIncorrectas = totalIncorrectas + newIncorrectAnswers
+    let newCorrectAnswers = correctAnswersTotal;
+    let newIncorrectAnswers = incorrectAnswersTotal;
+    let newPorcentage = progreso;
+    let newSegundosGenerales = segundosGenerales + segundosState;
+    let newMinutosGenerales = minutosGenerales + minutosState;
+    let newPreguntasContestadas = preguntasContestadas + (pregunta - 1);
+    let newTotalCorrectas = totalCorrectas + newCorrectAnswers;
+    let newTotalIncorrectas = totalIncorrectas + newIncorrectAnswers;
 
-    console.log('pro', progreso)
     let newData = {
-      "tiempo": {
-        "segundos": newSeconds,
-        "minutos": newMinutos
+      tiempo: {
+        segundos: newSeconds,
+        minutos: newMinutos,
       },
-      "correctAnswers": newCorrectAnswers,
-      "incorrectAnswers": newIncorrectAnswers,
-      "porcentaje":100
+      correctAnswers: newCorrectAnswers,
+      incorrectAnswers: newIncorrectAnswers,
+      porcentaje: 100,
     };
     let newDataGeneral = {
-      "tiempoDedicado":{
-        "segundosGenerales" : newSegundosGenerales,
-        "minutosGenerales" : newMinutosGenerales
+      tiempoDedicado: {
+        segundosGenerales: newSegundosGenerales,
+        minutosGenerales: newMinutosGenerales,
       },
-      "preguntasContestadas": newPreguntasContestadas,
-      "totalCorrectas": newTotalCorrectas,
-      "totalIncorrectas": newTotalIncorrectas
-    }
+      preguntasContestadas: newPreguntasContestadas,
+      totalCorrectas: newTotalCorrectas,
+      totalIncorrectas: newTotalIncorrectas,
+    };
 
-       setDataGame(prev => ({
-    "general":newDataGeneral, individuales:{
-      ...prev.individuales,
-     [quiz]:{...newData}
-    }
-       }));
-       let obj = {"user":user,"dataDailyBits":dataGame}
-       console.log('localId', localId)
-       axios
-       .put(url+localId, {...obj})
-       .then((res) => console.log(res.data))
-       .catch((error) => console.log(error));
-console.log('USUARIO ACTUALIZADO');
-      return navigate('/sprint2copy/home');
-    
-  }
+    setDataGame((prev) => ({
+      general: newDataGeneral,
+      individuales: {
+        ...prev.individuales,
+        [quiz]: { ...newData },
+      },
+    }));
+    let obj = { user: user, dataDailyBits: dataGame };
+    console.log("localId", localId);
+    axios
+      .put(url + localId, { ...obj })
+      .then((res) => console.log(res.data))
+      .catch((error) => console.log(error));
+    console.log("USUARIO ACTUALIZADO");
+    return navigate("/sprint2copy/home");
+  };
   const gameManager = () => {
-  console.log('numeroPreguntas', numeroPreguntas);
-   setNumeroPreguntas((e) => e - 1);
-   setProgreso((e) => e + 20);
+    console.log("numeroPreguntas", numeroPreguntas);
+    setNumeroPreguntas((e) => e - 1);
+  
+    setPregunta((e) => e + 1);
+    console.log("pro", progreso);
     if (numeroPreguntas === 0) {
       if (validateAnswer) {
-        
         setCurrentAnswer("");
         setValidateAnswer(undefined);
-        
-     
+
         clearSelection();
       } else {
         setVidas((e) => e - 1);
-       
+
         setCurrentAnswer("");
         setValidateAnswer(undefined);
 
         clearSelection();
       }
 
-   
-      addNewData()
-       
-
-      
+      addNewData();
     }
 
     if (validateAnswer) {
-      setProgreso((e) => e + 20);
-     
-      setPregunta((e) => e + 1);
-
       setCurrentAnswer("");
       setValidateAnswer(undefined);
 
       clearSelection();
     } else {
       setVidas((e) => e - 1);
-     
-      setProgreso((e) => e + 20);
-      setPregunta((e) => e + 1);
+
       setCurrentAnswer("");
       setValidateAnswer(undefined);
       clearSelection();
     }
-
   };
   const clearSelection = () => {
     let arrayRespuesta = document.getElementsByClassName("respuesta");
@@ -247,19 +246,19 @@ console.log('USUARIO ACTUALIZADO');
       </div>
     </RespuestaIncorrectaStyled>
   );
- 
-  useEffect(()=> {  
 
+  useEffect(() => {
     // console.log(segundosState);
-    let intervalCounterID = setInterval(()=>(
-      setSegundosState((e) => e + 1)
-    ),1000)
-    if(segundosState >= 60){
-     setMinutosState((e) => e += 1)
-     setSegundosState((e) => e = 0)
-
-} 
- return (() =>  clearInterval(intervalCounterID))},[segundosState])
+    let intervalCounterID = setInterval(
+      () => setSegundosState((e) => e + 1),
+      1000
+    );
+    if (segundosState >= 60) {
+      setMinutosState((e) => (e += 1));
+      setSegundosState((e) => (e = 0));
+    }
+    return () => clearInterval(intervalCounterID);
+  }, [segundosState]);
 
   return (
     <Flex>
@@ -313,3 +312,6 @@ console.log('USUARIO ACTUALIZADO');
 };
 
 export default Quiz;
+
+
+

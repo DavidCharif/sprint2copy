@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { fileUpload } from "../../helpers/fileUpload";
 import { url } from "../../helpers/url";
 import { SignInStyled } from "../../styles/SignInStyled";
+import validator from "validator";
 
 export const dataPre = {
   individuales: {
@@ -26,13 +27,19 @@ export const dataPre = {
       porcentaje: 0,
     },
     FIGMA: {
-      tiempo: 0,
+      tiempo: {
+        segundos: 0,
+        minutos: 0,
+      },
       correctAnswers: 0,
       incorrectAnswers: 0,
       porcentaje: 0,
     },
     JS: {
-      tiempo: 0,
+      tiempo: {
+        segundos: 0,
+        minutos: 0,
+      },
       correctAnswers: 0,
       incorrectAnswers: 0,
       porcentaje: 0,
@@ -67,28 +74,53 @@ const CreateAccount = () => {
   };
   const [values, setValue] = useState(initialState);
 
-  const handleInputChange = ({ target }) => {
-    console.log(target.value);
-    console.log(values);
+  const handleInputChange = (e) => {
+     switch(e.target.name){
+      case "Nombre":
+      case "Apellido":
+        if(e.target.value.length < 3){
+         e.target.classList += " invalid"
+         e.target.classList.remove("valid")
+         return console.log("Nombre no valido");
+        } else {
+          e.target.classList.remove("invalid")
+          e.target.classList += " valid"
+        }
+        break
+      case "Correo": 
+        if(!validator.isEmail(e.target.value)){
+          e.target.classList += " invalid"
+          e.target.classList.remove("valid")
+          return console.log("Correo no valido");
+         } else {
+           e.target.classList.remove("invalid")
+           e.target.classList += " valid"
+        }
+        break
+      case "pass1":
+        break
+      default:
+        console.log("Accion no permitida");
+    }
     // setValue({
     //   ...values,
     //   [target.name]: target.value,
     // });
     setValue(prev => ({
       ...prev,user : {
-          ...prev.user,[target.name]: target.value
+          ...prev.user,[e.target.name]: e.target.value.toLowerCase()
         }
       
     }));
   };
 
   const postData = () => {
-    axios
-      .post(url, values)
-      .then((res) => console.log(res.data))
-      .catch((error) => console.log(error));
-    resetForm();
-    navigate("/sprint2copy/");
+    // axios
+    //   .post(url, values)
+    //   .then((res) => console.log(res.data))
+    //   .catch((error) => console.log(error));
+    // resetForm();
+    // navigate("/sprint2copy/");
   };
   const resetForm = () => {
     setValue(initialState);
@@ -106,11 +138,17 @@ const CreateAccount = () => {
       })
       .catch((error) => console.log(error.message));
   };
+  const handleSubmit = (e) => {
+    e.preventDefault()
+  }
 
   return (
     <SignInStyled>
       <h3>Crea tu cuenta</h3>
-      <div>
+     
+        <form onSubmit={handleSubmit}>
+        <div>
+        <div>
         <label>Nombre</label>
         <input
           className="inputText"
@@ -119,6 +157,8 @@ const CreateAccount = () => {
           onChange={handleInputChange}
           type="text"
         />
+        </div>
+        <div>
         <label>Apellido</label>
         <input
           className="inputText"
@@ -127,30 +167,29 @@ const CreateAccount = () => {
           onChange={handleInputChange}
           type="text"
         />
+        </div>
+        <div>
         <label>Correo</label>
         <input
           className="inputText"
           name="Correo"
           value={values.Correo}
           onChange={handleInputChange}
-          type="text"
+          type="email"
         />
+        </div>
+        <div>
         <label>Contraseña</label>
         <input
           className="inputText"
           name="Password"
           value={values.Password}
           onChange={handleInputChange}
-          type="text"
+          type="password"
         />
-        <label> Confirma Contraseña</label>
-        <input
-          className="inputText"
-          name="Password"
-          value={values.Password}
-          // onChange={handleInputChange}
-          type="text"
-        />
+        </div>
+     
+        <div>
         <label>Imagen</label>
         <input
           id="botonImagen"
@@ -159,10 +198,14 @@ const CreateAccount = () => {
           value={values.urlImage}
           onChange={handleFileChange}
         />
-      </div>
+        </div>
+      <br />
       <button type="button" onClick={postData}>
         Enviar
       </button>
+      </div>
+      </form>
+      
     </SignInStyled>
   );
 };
