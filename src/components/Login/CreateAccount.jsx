@@ -115,12 +115,12 @@ const CreateAccount = () => {
   };
 
   const postData = () => {
-    // axios
-    //   .post(url, values)
-    //   .then((res) => console.log(res.data))
-    //   .catch((error) => console.log(error));
-    // resetForm();
-    // navigate("/sprint2copy/");
+    axios
+      .post(url, values)
+      .then((res) => console.log(res.data))
+      .catch((error) => console.log(error));
+    resetForm();
+    navigate("/sprint2copy/");
   };
   const resetForm = () => {
     setValue(initialState);
