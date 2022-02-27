@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { AiOutlineGoogle } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,7 +14,7 @@ const logoPurple =
   "https://res.cloudinary.com/davidcharif/image/upload/v1645632540/sprint2/design/images/logoContainerPurple_tnjgqa.png";
 const Login = () => {
   const { data, isLoading } = useFetch(url);
-  const { user, setUser, dataGame, setDataGame, setLogin, setLocalId } =
+  const { user, setUser, dataGame, setDataGame, setLogin, setLocalId, localId } =
     useContext(UserContext);
   const [correo, setCorreo] = useState("");
   const [isUser, setIsUser] = useState(false);
@@ -22,7 +22,25 @@ const Login = () => {
   console.log(data);
   const navigate = useNavigate();
   //console.log(isUser, 'isUser');
-
+  const checkInLocal = () => {
+    let user = JSON.parse(window.localStorage.getItem("user"));
+    if (user) {
+      let dataGame = JSON.parse(window.localStorage.getItem("dataGame"));
+      let id = JSON.parse(window.localStorage.getItem("id"));
+      setLocalId(id)
+      setLogin(true)
+      setIsUser(true);
+      setDataGame(dataGame)
+      setUser(user);
+      console.log(user);
+      navigate("/sprint2copy/home")
+    }
+  };
+  useEffect(() => {
+    
+    checkInLocal();
+    
+  });
   if (isLoading) {
     return <Loading />;
   }
@@ -46,56 +64,72 @@ const Login = () => {
   };
   const validatePassword = (value) => {
     console.log(dataGame, "validata");
-    if (user.Password === value) {
+    
+     if (user.Password === value) {
       // setUser(prev => {
       //   return {...prev , loggedIn : true}})
       setLogin((e) => (e = true));
-
+      saveOnLocal();
       navigate("/sprint2copy/home");
     } else {
       console.log("Contraseña incorrecta");
     }
   };
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   const AskEmail = (
     <>
-      <div className="correoElectronico">
-        <p>Correo electrónico</p>
-      </div>
-      <input
-        className="inputText"
-        value={correo}
-        onChange={handleChange}
-        type="text"
-        placeholder="Ingrese su correo electrónico"
-      ></input>
+      <form onSubmit={handleSubmit}>
+        <div className="correoElectronico">
+          <p>Correo electrónico</p>
+        </div>
+        <input
+          className="inputText"
+          value={correo}
+          onChange={handleChange}
+          type="text"
+          placeholder="Ingrese su correo electrónico"
+        ></input>
+      </form>
     </>
   );
 
   const AskPassword = (
     <>
-      <div className="correoElectronico">
-        <p>Contraseña</p>
-      </div>
-      <input
-        className="inputText"
-        value={password}
-        onChange={handleChangePass}
-        type="password"
-        placeholder="Ingrese su contraseña"
-      ></input>
+      <form onSubmit={handleSubmit}>
+        <div className="correoElectronico">
+          <p>Contraseña</p>
+        </div>
+        <input
+          className="inputText"
+          value={password}
+          onChange={handleChangePass}
+          type="password"
+          placeholder="Ingrese su contraseña"
+        ></input>
+      </form>
     </>
   );
 
+  const saveOnLocal = () => {
+    window.localStorage.setItem("user", JSON.stringify(user));
+    window.localStorage.setItem("dataGame", JSON.stringify(dataGame));
+    window.localStorage.setItem("id", JSON.stringify(localId));
+  }
+  
+  
+  
+    
   const UserEmailExist = (email) => {
     console.log("Entramos a validar");
 
     // if(data.Correo)
     for (let i = 0; i < data.length; i++) {
       if (data[i].user.Correo.toLowerCase() === email.toLowerCase()) {
-        console.log(data[i], "data I");
+       
         const { id, user, dataDailyBits } = data[i];
-        console.log("dataDaily", dataDailyBits);
+        
         setUser({ ...user });
         setLocalId(id);
         setDataGame({ ...dataDailyBits });
@@ -105,6 +139,7 @@ const Login = () => {
     }
   };
   const validarEmail = (email) => validator.isEmail(email);
+
 
   return (
     <Flex>

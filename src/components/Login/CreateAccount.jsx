@@ -58,9 +58,9 @@ export const dataPre = {
     totalCorrectas: 0,
     totalIncorrectas: 0,
     tiempoDedicado: {
-      segundos: 0,
-      minutos: 0,
-      horas: 0,
+      segundosGenerales: 0,
+      minutosGenerales: 0,
+      horasGenerales: 0,
     },
     preguntasContestadas: 0,
   },

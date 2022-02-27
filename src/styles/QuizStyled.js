@@ -1,13 +1,41 @@
 import styled from "styled-components";
-import { _black, _green, _red, _white, _body1_bold, _headline_headline2, _purple } from "./style";
+import {
+  _black,
+  _green,
+  _red,
+  _white,
+  _body1_bold,
+  _headline_headline2,
+  _purple,
+} from "./style";
 
 export const QuizStyled = styled.div`
+  @keyframes heartbeat {
+    0% {
+      transform: scale(0.75);
+    }
+    20% {
+      transform: scale(1);
+    }
+    40% {
+      transform: scale(0.75);
+    }
+    60% {
+      transform: scale(1);
+    }
+    80% {
+      transform: scale(0.75);
+    }
+    100% {
+      transform: scale(0.75);
+    }
+  }
   background-color: ${_black};
   display: flex;
-  justify-content: center;
+
   flex-direction: column;
   height: 100vh;
-  
+
   width: 100%;
   .selected {
     border: 2px solid ${_green};
@@ -23,7 +51,6 @@ export const QuizStyled = styled.div`
   }
 
   .barraDeVida {
-    margin-top: 30px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -36,12 +63,15 @@ export const QuizStyled = styled.div`
 
       border-radius: 20px;
     }
-    img {
+
+    .heart {
       width: 24px;
       height: 24px;
       margin-right: 5px;
       margin-left: 5px;
+      animation: heartbeat 2s infinite;
     }
+
     p {
       font: ${_body1_bold};
       color: white;
@@ -58,27 +88,28 @@ export const QuizStyled = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    p {
-      font: ${_headline_headline2};
-      width: 70%;
-      color: ${_white};
-    }
+p{
+    font: ${_headline_headline2};
+    width: 70%;
+    color: ${_white};
+    
+  }
     img {
       width: 75px;
       height: 160px;
     }
     @media (min-width: 700px) {
-      p {
-        font-size: 40px;
-        margin: 0%;
-      }
+      p{
+      font-size: 40px;
+      margin: 0%;
+    }
     }
   }
   .boton {
     display: flex;
     justify-content: center;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 10px;
     @media (min-width: 700px) {
       margin-top: 155px;
     }

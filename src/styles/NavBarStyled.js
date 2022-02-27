@@ -16,8 +16,8 @@ export const NavBarStyled = styled.div`
     align-items: center;
     color: ${_white};
     img {
-      min-width: 24px;
-      min-height: 24px;
+      width: 24px;
+      height: 24px;
       filter: invert(78%) sepia(94%) saturate(22%) hue-rotate(307deg)
         brightness(107%) contrast(106%);
       margin-top: 5px;

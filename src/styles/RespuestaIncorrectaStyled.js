@@ -19,6 +19,7 @@ export const RespuestaIncorrectaStyled = styled.div`
     font: ${_button_button};
     color: white;
     margin: auto;
+    margin-bottom: 10px;
   }
   h2 {
     font: ${_body1_bold};

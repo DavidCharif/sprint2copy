@@ -8,7 +8,7 @@ export const RespuestaCorrectaStyled = styled.div`
   color: ${_black};
   background-color: ${_lightgreen};
   width: 100%;
-  height: 130px;
+  
   flex-direction: column;
   .boton {
     cursor: pointer;
@@ -20,6 +20,7 @@ export const RespuestaCorrectaStyled = styled.div`
     font: ${_button_button};
     color: white;
     margin: auto;
+    margin-bottom: 10px;
   }
   h2 {
     font: ${_body1_bold};

@@ -9,13 +9,13 @@ const css =
   "https://res.cloudinary.com/davidcharif/image/upload/v1645632536/sprint2/design/languages/cssHQ_fcizmg.png";
 const figma =
   "https://res.cloudinary.com/davidcharif/image/upload/v1645632536/sprint2/design/languages/figmaHQ_gc4tun.png";
-
 const js =
   "https://res.cloudinary.com/davidcharif/image/upload/v1645632537/sprint2/design/languages/jsHQ_bqtvhb.png";
 const ux =
   "https://res.cloudinary.com/davidcharif/image/upload/v1645632537/sprint2/design/languages/ux_p7raq9.png";
 const Home = () => {
-  const {  dataGame } = useContext(UserContext);
+  const {  dataGame, user } = useContext(UserContext);
+  console.log(user);
   console.log(dataGame, 'data');
   const {general, individuales: {HTML, FIGMA, CSS, JS, UX}} = dataGame
  

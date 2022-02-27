@@ -25,6 +25,7 @@ const Perfil = () => {
           //   data:{},loggedIn : false
           // })
           setLogin(false)
+          window.localStorage.clear()
         }}> Cerrar sesión</button>
       </div>
       

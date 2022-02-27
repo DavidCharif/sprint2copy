@@ -10,6 +10,14 @@ export const LoginStyled = styled.div`
   justify-content: center;
   flex-direction: column;
   gap: 5px;
+  form{
+    display: flex;
+    flex-direction: column;
+   
+    
+    align-items: center;
+    width: 100%;
+  }
   h1 {
     font: ${_headline_headline1};
     color: ${_white};

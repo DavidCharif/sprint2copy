@@ -60,6 +60,7 @@ export const HomeStyled = styled.div`
         height: 74px;
         width: 74px;
         margin: 10px;
+       
         background-color: ${_black};
         @media (min-width: 650px) {
           height: 138px;
@@ -71,7 +72,7 @@ export const HomeStyled = styled.div`
         --fg: ${_green};
         --bg: #dddddd;
         --pgPercentage: var(--value);
-
+        border: 1px solid ${_black};
         border-radius: 50%;
 
         background: radial-gradient(

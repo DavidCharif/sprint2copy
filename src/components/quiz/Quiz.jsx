@@ -49,8 +49,8 @@ const Quiz = () => {
   //use reducer
   const { dataGame, setDataGame, localId, user } = useContext(UserContext);
   const [vidas, setVidas] = useState(4);
-  const [segundosState, setSegundosState] = useState(0);
-  const [minutosState, setMinutosState] = useState(0);
+  const [segundosState, setSegundosState] = useState(segundos);
+  const [minutosState, setMinutosState] = useState(minutos);
   const [progreso, setProgreso] = useState(0);
   const [pregunta, setPregunta] = useState(1);
   let preguntas;
@@ -123,7 +123,7 @@ const Quiz = () => {
     let newPorcentage = progreso;
     let newSegundosGenerales = segundosGenerales + segundosState;
     let newMinutosGenerales = minutosGenerales + minutosState;
-    let newPreguntasContestadas = preguntasContestadas + (pregunta - 1);
+    let newPreguntasContestadas = preguntasContestadas + pregunta ;
     let newTotalCorrectas = totalCorrectas + newCorrectAnswers;
     let newTotalIncorrectas = totalIncorrectas + newIncorrectAnswers;
 
@@ -134,7 +134,7 @@ const Quiz = () => {
       },
       correctAnswers: newCorrectAnswers,
       incorrectAnswers: newIncorrectAnswers,
-      porcentaje: 100,
+      porcentaje:newPorcentage,
     };
     let newDataGeneral = {
       tiempoDedicado: {
@@ -163,11 +163,11 @@ const Quiz = () => {
     return navigate("/sprint2copy/home");
   };
   const gameManager = () => {
-    console.log("numeroPreguntas", numeroPreguntas);
+    
     setNumeroPreguntas((e) => e - 1);
-  
+
     setPregunta((e) => e + 1);
-    console.log("pro", progreso);
+    
     if (numeroPreguntas === 0) {
       if (validateAnswer) {
         setCurrentAnswer("");
@@ -186,18 +186,13 @@ const Quiz = () => {
       addNewData();
     }
 
-    if (validateAnswer) {
-      setCurrentAnswer("");
-      setValidateAnswer(undefined);
-
-      clearSelection();
-    } else {
+    if (!validateAnswer) {
       setVidas((e) => e - 1);
-
+    }
       setCurrentAnswer("");
       setValidateAnswer(undefined);
       clearSelection();
-    }
+    
   };
   const clearSelection = () => {
     let arrayRespuesta = document.getElementsByClassName("respuesta");
@@ -274,7 +269,7 @@ const Quiz = () => {
           <div id="myProgress">
             <div id="myBar" style={{ "--fill": `${progreso}%` }}></div>
           </div>
-          <img src={vidasIcon} alt="iconoDeVidas" />
+          <img className="heart" src={vidasIcon} alt="iconoDeVidas" />
           <p>{vidas}</p>
         </div>
         <div className="pregunta">
@@ -282,6 +277,7 @@ const Quiz = () => {
           <p>{preguntas[pregunta].pregunta}</p>
         </div>
         <div className="respuestas">
+
           {preguntas[pregunta].opciones.map((opcion, index) => {
             return (
               <BotonRespuestas
@@ -295,6 +291,7 @@ const Quiz = () => {
               </BotonRespuestas>
             );
           })}
+          
         </div>
         <div className="boton">
           <BotonValidar id="boton" onClick={handleAnswers}>
@@ -312,6 +309,3 @@ const Quiz = () => {
 };
 
 export default Quiz;
-
-
-

@@ -1,10 +1,18 @@
 import styled from "styled-components";
-import { _black, _white, _headline_headline2, _body1_regular, _body1_bold, _green, _red } from "./style";
+import {
+  _black,
+  _white,
+  _headline_headline2,
+  _body1_regular,
+  _body1_bold,
+  _green,
+  _red,
+} from "./style";
 
 export const EstadisticasStyled = styled.div`
   background-color: ${_black};
- width: 100%;
- height: 100vh;
+  width: 100%;
+  height: 100vh;
   display: flex;
   color: ${_white};
   flex-direction: column;
@@ -17,10 +25,11 @@ export const EstadisticasStyled = styled.div`
     font: ${_body1_regular};
     margin-left: 15px;
   }
-  .bloquePerfil{
-   margin:0;
-        min-width: 350px;
-      }
+  .bloquePerfil {
+    margin: 0;
+    min-width: 350px;
+  }
+
   .bloque {
     display: flex;
     flex-direction: row;
@@ -42,14 +51,13 @@ export const EstadisticasStyled = styled.div`
     .incorrectas {
       color: ${_red};
     }
-    
   }
-  @media (min-width : 700px  ) {
+  @media (min-width: 700px) {
     display: flex;
     align-items: center;
-      .bloquePerfil{
-   margin:0;
-        width: 600px;
-      }
+    .bloquePerfil {
+      margin: 0;
+      width: 600px;
     }
+  }
 `;
