@@ -132,6 +132,7 @@ const Login = () => {
         
         setUser({ ...user });
         setLocalId(id);
+        
         setDataGame({ ...dataDailyBits });
         setIsUser(true);
         break;

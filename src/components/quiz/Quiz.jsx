@@ -6,8 +6,9 @@ import {
   preguntasHtml,
   preguntasJs,
   preguntasUx,
+  preguntasCss
 } from "../quiz/quizData";
-import { preguntasCss } from "../quiz/quizData";
+
 import { UserContext } from "../../hooks/UserContext";
 
 import { Flex } from "../../styles/Flex";
@@ -128,7 +129,6 @@ const Quiz = () => {
     let newMinutos = minutos + minutosState;
     let newCorrectAnswers = correctAnswersTotal;
     let newIncorrectAnswers = incorrectAnswersTotal;
-    let newPorcentage = progreso;
     let newSegundosGenerales = segundosGenerales + segundosState;
     let newMinutosGenerales = minutosGenerales + minutosState;
     let newPreguntasContestadas = preguntasContestadas + pregunta;
@@ -142,7 +142,7 @@ const Quiz = () => {
       },
       correctAnswers: newCorrectAnswers,
       incorrectAnswers: newIncorrectAnswers,
-      porcentaje: newPorcentage,
+      porcentaje: 100,
     };
     let newDataGeneral = {
       tiempoDedicado: {
@@ -165,10 +165,16 @@ const Quiz = () => {
     console.log("localId", localId);
     axios
       .put(url + localId, { ...obj })
-      .then((res) => console.log(res.data))
+      .then((res) =>  console.log("USUARIO ACTUALIZADO"))
       .catch((error) => console.log(error));
-    console.log("USUARIO ACTUALIZADO");
-    return navigate("/sprint2copy/home");
+      window.localStorage.setItem("user", JSON.stringify(user));
+      window.localStorage.setItem("dataGame", JSON.stringify(dataGame));      
+   
+      navigate('/sprint2copy/quiz/resultados',{
+        state: {
+          data:newData,
+          gameOver:false
+        }})
   };
   const gameManager = () => {
     setNumeroPreguntas((e) => e - 1);
@@ -250,10 +256,11 @@ const Quiz = () => {
         })
       );
     }
-    if (currentAnswer2.length > 4) {
+    if (currentAnswer2.length >= preguntas[pregunta].opciones.length) {
       boton.classList += " isSelected";
       let answer = currentAnswer2;
-      answer = answer.join();
+      answer = answer.join('');
+      
       console.log("answer", answer);
       setCurrentAnswer(answer);
     }
@@ -367,9 +374,30 @@ const Quiz = () => {
       </div>
     </RespuestaIncorrectaStyled>
   );
+  const gameOver = () => {
+  
+    let newData = {
+      tiempo: {
+        segundos: segundosState,
+        minutos:minutosState,
+      },
+      correctAnswers: correctAnswersTotal,
+      incorrectAnswers: incorrectAnswersTotal,
+      porcentaje: progreso,
+    }
+    navigate('/sprint2copy/quiz/resultados',{
+     state: {
+       data:newData,
+       gameOver:true
+     }})
+    
+  }
 
   useEffect(() => {
     // console.log(segundosState);
+    if(vidas === 0){
+      gameOver()
+    }
     let intervalCounterID = setInterval(
       () => setSegundosState((e) => e + 1),
       1000
@@ -379,7 +407,7 @@ const Quiz = () => {
       setSegundosState((e) => (e = 0));
     }
     return () => clearInterval(intervalCounterID);
-  }, [segundosState]);
+  }, [segundosState, vidas]);
 
   return (
     <Flex>

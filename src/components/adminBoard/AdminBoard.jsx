@@ -177,8 +177,8 @@ const AdminBoard = () => {
         )}
         </div>
       </div>
-      <NavBar/>
     </AdminBoardStyled>
+      <NavBar/>
     
   </>
   );

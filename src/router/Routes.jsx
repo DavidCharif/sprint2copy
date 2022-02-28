@@ -7,6 +7,7 @@ import CreateAccount from "../components/Login/CreateAccount";
 import Login from "../components/Login/Login";
 
 import Perfil from "../components/Perfil/Perfil";
+import EstadisticasGame from "../components/quiz/EstadisticasGame";
 import Quiz from "../components/quiz/Quiz";
 import ProtectedRoutes, { ProtectedAdmin } from "./ProtectedRoutes";
 
@@ -27,6 +28,7 @@ const RoutesPerso = () => {
           <Route path="/sprint2copy/estadisticas" element={<Estadisticas />} />
           <Route path="/sprint2copy/perfil" element={<Perfil />} />
           <Route path="/sprint2copy/quiz" element={<Quiz />} />
+          <Route path="/sprint2copy/quiz/resultados" element={<EstadisticasGame />} />
         </Route>
         <Route element={<ProtectedAdmin />}>
           <Route path="/sprint2copy/admin" element={<AdminBoard />} />
