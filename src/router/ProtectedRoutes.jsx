@@ -5,7 +5,7 @@ import { UserContext } from '../hooks/UserContext';
 
 const useAuth = () => {
   const {login} = useContext(UserContext);
-  console.log('user auth', login);
+  // console.log('user auth', login);
   return login}
 
 const useAdmin = () => {

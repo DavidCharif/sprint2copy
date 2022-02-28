@@ -6,7 +6,7 @@ import NavBar from '../NavBar/NavBar';
 
 const Perfil = () => {
   const { user, setLogin } = (useContext(UserContext))
-  console.log('data desde perfil' , user);
+  // console.log('data desde perfil' , user);
   return (
     <>
     <PerfilStyled>

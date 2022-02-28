@@ -26,7 +26,7 @@ const EstadisticasGame = () => {
   const state = useLocation();
   let datos = state.state.data;
   let gameOver = state.state.gameOver;
-  console.log("datos", datos);
+  // console.log("datos", datos);
   const {
     tiempo: { segundos, minutos },
     correctAnswers,

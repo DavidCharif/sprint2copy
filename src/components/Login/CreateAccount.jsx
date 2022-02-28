@@ -117,7 +117,7 @@ const CreateAccount = () => {
   const postData = () => {
     axios
       .post(url, values)
-      .then((res) => console.log(res.data))
+      .then((res) => "")
       .catch((error) => console.log(error));
     resetForm();
     navigate("/sprint2copy/");

@@ -97,14 +97,14 @@ const Quiz = () => {
   const [incorrectAnswersTotal, setIncorrectAnswersTotal] = useState(0);
 
   const handleAnswers = () => {
-    console.log('progreso', progreso)
+    // console.log('progreso', progreso)
     const respuesta = preguntas[pregunta].respuesta;
 
     if (currentAnswer.length === 0) {
       return console.log("Select an answer");
     }
     if (currentAnswer.length > 0) {
-      console.log("currentAnswer, respuesta", currentAnswer, respuesta);
+      // console.log("currentAnswer, respuesta", currentAnswer, respuesta);
       if (currentAnswer === respuesta) {
         setProgreso(e => e + 20);
         setCorrectAnswersTotal((e) => e + 1);
@@ -124,7 +124,7 @@ const Quiz = () => {
     setValidateAnswer(currentAnswer === respuesta);
   };
   const addNewData = () => {
-    console.log("segundosGenerales", segundosGenerales);
+    // console.log("segundosGenerales", segundosGenerales);
     let newSeconds = segundos + segundosState;
     let newMinutos = minutos + minutosState;
     let newCorrectAnswers = correctAnswersTotal;
@@ -162,7 +162,7 @@ const Quiz = () => {
       },
     }));
     let obj = { user: user, dataDailyBits: dataGame };
-    console.log("localId", localId);
+    // console.log("localId", localId);
     axios
       .put(url + localId, { ...obj })
       .then((res) =>  console.log("USUARIO ACTUALIZADO"))
@@ -261,10 +261,10 @@ const Quiz = () => {
       let answer = currentAnswer2;
       answer = answer.join('');
       
-      console.log("answer", answer);
+      // console.log("answer", answer);
       setCurrentAnswer(answer);
     }
-    console.log(currentAnswer2.length, "lenght ");
+    // console.log(currentAnswer2.length, "lenght ");
   };
   const handleSelection3 = (e) => {
     let boton = document.getElementById("boton");

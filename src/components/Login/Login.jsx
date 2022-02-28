@@ -19,7 +19,7 @@ const Login = () => {
   const [correo, setCorreo] = useState("");
   const [isUser, setIsUser] = useState(false);
   const [password, setPassword] = useState("");
-  console.log(data);
+  // console.log(data);
   const navigate = useNavigate();
   //console.log(isUser, 'isUser');
   const checkInLocal = () => {
@@ -32,7 +32,7 @@ const Login = () => {
       setIsUser(true);
       setDataGame(dataGame)
       setUser(user);
-      console.log(user);
+      // console.log(user);
       navigate("/sprint2copy/home")
     }
   };
@@ -63,7 +63,7 @@ const Login = () => {
     validatePassword(passValue);
   };
   const validatePassword = (value) => {
-    console.log(dataGame, "validata");
+    // console.log(dataGame, "validata");
     
      if (user.Password === value) {
       // setUser(prev => {
@@ -122,7 +122,7 @@ const Login = () => {
   
     
   const UserEmailExist = (email) => {
-    console.log("Entramos a validar");
+    // console.log("Entramos a validar");
 
     // if(data.Correo)
     for (let i = 0; i < data.length; i++) {

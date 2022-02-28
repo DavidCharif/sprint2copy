@@ -27,7 +27,7 @@ const AdminBoard = () => {
       dataUser: dataUser,
       infoUser: infoUser,
     });
-   console.log(currentUser.dataUser);
+  //  console.log(currentUser.dataUser);
   };
 
   const Stats = () => {
@@ -104,7 +104,7 @@ const AdminBoard = () => {
     );
   };
   const Botones = () => {
-    console.log(currentUser);
+    // console.log(currentUser);
     const { individuales } = currentUser.dataUser;
     let lista = ["General"];
     for (const [key] of Object.entries(individuales)) lista.push(key);
@@ -133,7 +133,8 @@ const AdminBoard = () => {
       }
     }
       e.target.classList += ' active'
-     return console.log(active);
+      return ""
+    //  return console.log(active);
   };
 
   return (

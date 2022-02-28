@@ -14,9 +14,9 @@ const js =
 const ux =
   "https://res.cloudinary.com/davidcharif/image/upload/v1645632537/sprint2/design/languages/ux_p7raq9.png";
 const Home = () => {
-  const {  dataGame, user } = useContext(UserContext);
-  console.log(user);
-  console.log(dataGame, 'data');
+  const {  dataGame } = useContext(UserContext);
+  // console.log(user);
+  // console.log(dataGame, 'data');
   const {general, individuales: {HTML, FIGMA, CSS, JS, UX}} = dataGame
  
   // HTML = {
