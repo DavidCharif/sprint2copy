@@ -14,7 +14,11 @@ import { Flex } from "../../styles/Flex";
 import { QuizStyled } from "../../styles/QuizStyled";
 import { RespuestaIncorrectaStyled } from "../../styles/RespuestaIncorrectaStyled";
 import { RespuestaCorrectaStyled } from "../../styles/RespuestaCorrectaStyled";
-import { BotonRespuestas } from "../../styles/BotonRespuestas";
+import {
+  BotonRespuestas,
+  BotonRespuestas2,
+  BotonRespuestas3,
+} from "../../styles/BotonRespuestas";
 import { BotonValidar } from "../../styles/BotonValidar";
 import axios from "axios";
 import { url } from "../../helpers/url";
@@ -86,18 +90,22 @@ const Quiz = () => {
   );
   const navigate = useNavigate();
   const [currentAnswer, setCurrentAnswer] = useState("");
+  const [currentAnswer2, setCurrentAnswer2] = useState([]);
   const [validateAnswer, setValidateAnswer] = useState(undefined);
   const [correctAnswersTotal, setCorrectAnswersTotal] = useState(0);
   const [incorrectAnswersTotal, setIncorrectAnswersTotal] = useState(0);
 
   const handleAnswers = () => {
+    console.log('progreso', progreso)
     const respuesta = preguntas[pregunta].respuesta;
-    setProgreso((e) => e + 20);
+
     if (currentAnswer.length === 0) {
       return console.log("Select an answer");
     }
     if (currentAnswer.length > 0) {
+      console.log("currentAnswer, respuesta", currentAnswer, respuesta);
       if (currentAnswer === respuesta) {
+        setProgreso(e => e + 20);
         setCorrectAnswersTotal((e) => e + 1);
       } else {
         let respuestas = document.getElementsByClassName("respuesta");
@@ -123,7 +131,7 @@ const Quiz = () => {
     let newPorcentage = progreso;
     let newSegundosGenerales = segundosGenerales + segundosState;
     let newMinutosGenerales = minutosGenerales + minutosState;
-    let newPreguntasContestadas = preguntasContestadas + pregunta ;
+    let newPreguntasContestadas = preguntasContestadas + pregunta;
     let newTotalCorrectas = totalCorrectas + newCorrectAnswers;
     let newTotalIncorrectas = totalIncorrectas + newIncorrectAnswers;
 
@@ -134,7 +142,7 @@ const Quiz = () => {
       },
       correctAnswers: newCorrectAnswers,
       incorrectAnswers: newIncorrectAnswers,
-      porcentaje:newPorcentage,
+      porcentaje: newPorcentage,
     };
     let newDataGeneral = {
       tiempoDedicado: {
@@ -163,14 +171,14 @@ const Quiz = () => {
     return navigate("/sprint2copy/home");
   };
   const gameManager = () => {
-    
     setNumeroPreguntas((e) => e - 1);
 
     setPregunta((e) => e + 1);
-    
+
     if (numeroPreguntas === 0) {
       if (validateAnswer) {
         setCurrentAnswer("");
+       
         setValidateAnswer(undefined);
 
         clearSelection();
@@ -187,11 +195,11 @@ const Quiz = () => {
     }
 
     if (!validateAnswer) {
-      setVidas((e) => e - 1);
-    }
-      setCurrentAnswer("");
-      setValidateAnswer(undefined);
-      clearSelection();
+      setVidas(e => e - 1);
+    } 
+    setCurrentAnswer("");
+    setValidateAnswer(undefined);
+    clearSelection();
     
   };
   const clearSelection = () => {
@@ -224,6 +232,124 @@ const Quiz = () => {
     }
     setCurrentAnswer(value);
   };
+  const handleSelection2 = (e) => {
+    let boton = document.getElementById("boton");
+    let value = e.target.getAttribute("value");
+    if (!currentAnswer2.includes(value)) {
+      e.target.classList += " onList";
+      setCurrentAnswer2((e) => {
+        let list = e;
+        list.push(value);
+        return list;
+      });
+    } else {
+      e.target.classList.remove("onList");
+      setCurrentAnswer2(
+        currentAnswer2.filter((ele) => {
+          return ele !== value;
+        })
+      );
+    }
+    if (currentAnswer2.length > 4) {
+      boton.classList += " isSelected";
+      let answer = currentAnswer2;
+      answer = answer.join();
+      console.log("answer", answer);
+      setCurrentAnswer(answer);
+    }
+    console.log(currentAnswer2.length, "lenght ");
+  };
+  const handleSelection3 = (e) => {
+    let boton = document.getElementById("boton");
+    clearSelection();
+    let value = e.target.getAttribute("value");
+
+    setCurrentAnswer(value);
+    if (e.target.classList.contains("respuesta")) {
+      
+      e.target.className += " selected";
+    }
+
+    if (e.target.classList.contains("selected")) {
+      boton.classList += " isSelected";
+    }
+  };
+  const handleRemove = ({ target }) => {
+    let value = target.getAttribute("value");
+    let respuestas = document.getElementsByClassName("respuesta2");
+    for (let i = 0; i < respuestas.length; i++) {
+      let valueInterno = respuestas[i].getAttribute("value");
+      if (valueInterno === value) {
+        respuestas[i].classList.remove("onList");
+      }
+    }
+    setCurrentAnswer2(
+      currentAnswer2.filter((ele) => {
+        return ele !== value;
+      })
+    );
+  };
+  const createAnswersByType = (index, opcion) => {
+    let myContainer = document.getElementById("containerRespuestas");
+    let canva = document.getElementById("canva");
+
+    let type = preguntas[pregunta].type;
+
+    switch (type) {
+      case "1":
+        return (
+          <BotonRespuestas
+            className="respuesta"
+            key={index}
+            value={opcion}
+            onClick={handleSelection}
+          >
+            {opcion}
+            <img src={emptyCircle} alt="circle"></img>
+          </BotonRespuestas>
+        );
+      case "2":
+        canva.style.display = "flex";
+        myContainer.classList.remove("respuestas");
+        if (!myContainer.classList.contains("respuestas2")) {
+          myContainer.classList += "respuestas2";
+        }
+        canva.style.height = "500px";
+
+        return (
+          <BotonRespuestas2
+            className="respuesta2"
+            key={index}
+            value={opcion}
+            onClick={handleSelection2}
+          >
+            {opcion}
+          </BotonRespuestas2>
+        );
+
+      case "3":
+        canva.style.display = "none";
+        return (
+          <BotonRespuestas3
+            key={index}
+            value={opcion}
+            onClick={handleSelection3}
+            className="respuesta"
+          >
+            <img
+              src={preguntas[pregunta].imagenes[index]}
+              value={opcion}
+              alt={opcion}
+              onClick={handleSelection3}
+            />
+            {opcion}
+          </BotonRespuestas3>
+        );
+
+      default:
+    }
+  };
+
   const RespuestaCorrecta = (
     <RespuestaCorrectaStyled>
       <h2>Buen trabajo!</h2>
@@ -276,22 +402,37 @@ const Quiz = () => {
           <img src={preguntas[pregunta].imgUrl} alt="greenCharacter" />
           <p>{preguntas[pregunta].pregunta}</p>
         </div>
-        <div className="respuestas">
-
+        <div className="canva" id="canva">
+          {currentAnswer2.length > 0 &&
+            currentAnswer2.map((answer, index) => {
+              return (
+                <BotonRespuestas2
+                  key={index}
+                  className="respuestasType2"
+                  value={answer}
+                  onClick={handleRemove}
+                >
+                  {answer}
+                </BotonRespuestas2>
+              );
+            })}
+        </div>
+        <div className="respuestas" id="containerRespuestas">
           {preguntas[pregunta].opciones.map((opcion, index) => {
-            return (
-              <BotonRespuestas
-                className="respuesta"
-                key={index}
-                value={opcion}
-                onClick={handleSelection}
-              >
-                <p>{opcion}</p>
-                <img src={emptyCircle} alt="circle"></img>
-              </BotonRespuestas>
-            );
+            return createAnswersByType(index, opcion);
+            // return (
+            //
+            //   <BotonRespuestas
+            //     className="respuesta"
+            //     key={index}
+            //     value={opcion}
+            //     onClick={handleSelection}
+            //   >
+            //     <p>{opcion}</p>
+            //     <img src={emptyCircle} alt="circle"></img>
+            //   </BotonRespuestas>
+            // );
           })}
-          
         </div>
         <div className="boton">
           <BotonValidar id="boton" onClick={handleAnswers}>

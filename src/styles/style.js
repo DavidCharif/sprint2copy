@@ -2,7 +2,7 @@
 export const _white = "#fffffe";
 export const _black = "#16161a";
 export const _primary = "#7f5af0";
-// const _secondary = "#a786df";
+export const _secondary = "#a786df";
 // const _tertiary = "#72757e";
 export const _green = "#2cb67d";
 export const _lightgreen = "#ACFFCF";

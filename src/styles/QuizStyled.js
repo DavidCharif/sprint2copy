@@ -40,11 +40,22 @@ export const QuizStyled = styled.div`
   .selected {
     border: 2px solid ${_green};
   }
+ 
 
   .respuestas {
     display: flex;
     flex-direction: column;
     align-items: center;
+    .wrong {
+      border: 2px solid ${_red};
+    }}
+  .respuestas2 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    
+     justify-content: center;
     .wrong {
       border: 2px solid ${_red};
     }
@@ -116,5 +127,13 @@ p{
   }
   .isSelected {
     background-color: ${_purple};
+  }
+  .canva{
+    display: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    align-content: flex-start;
   }
 `;
