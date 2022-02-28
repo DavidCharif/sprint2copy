@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/sprint2copy/static/css/main.6781babe.css",
-    "main.js": "/sprint2copy/static/js/main.96c298ad.js",
+    "main.js": "/sprint2copy/static/js/main.b97cc293.js",
     "index.html": "/sprint2copy/index.html",
     "main.6781babe.css.map": "/sprint2copy/static/css/main.6781babe.css.map",
-    "main.96c298ad.js.map": "/sprint2copy/static/js/main.96c298ad.js.map"
+    "main.b97cc293.js.map": "/sprint2copy/static/js/main.b97cc293.js.map"
   },
   "entrypoints": [
     "static/css/main.6781babe.css",
-    "static/js/main.96c298ad.js"
+    "static/js/main.b97cc293.js"
   ]
 }
